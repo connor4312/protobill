@@ -1,6 +1,6 @@
 ## Protobill
 
-[![Build Status](https://travis-ci.org/laravel/framework.png)](https://travis-ci.org/laravel/framework)
+[![Build Status](https://travis-ci.org/connor4312/protobill.png)](https://travis-ci.org/connor4312/protobill)
 
 Protobill is designed to be a clean, secure, flexible, and extensible open source billing system. We want you to contribute, find bugs, and build your own incredible creations with Protobill.
 
