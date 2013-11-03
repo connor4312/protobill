@@ -14,9 +14,10 @@ define [
 			$.ajax
 				url: window.baseurl + '/api/authenticate'
 				data:
-					username: @get('username')
+					email: @get('email')
 					password: @get('password')
 				dataType: 'json'
+				type: 'POST'
 				success: (data) =>
 					@set data
 					onSuccess()

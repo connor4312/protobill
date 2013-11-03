@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder {
 				'postcode' => '123456',
 				'country' => 'USA',
 				'phone' => '+123-456-1234',
-				'password' => '',
+				'password' => Hash::make('seekrit123'),
 				'credit' => 0,
 				'created_at' => '2013-00-00 00:00:00',
 				'updated_at' => '2013-00-00 00:00:00'

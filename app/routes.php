@@ -14,6 +14,10 @@
 
 Route::group(array('prefix' => '/api'), function() {
 	Route::resource('user', 'UsersController');
+
+	Route::post('authenticate', 'AuthenticationController@index');
+	Route::post('authenticate/logout', 'AuthenticationController@logout');
+	Route::post('authenticate/current', 'AuthenticationController@current');
 });
 
 Route::get('/{path?}', function() {
