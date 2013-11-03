@@ -14,6 +14,7 @@ define [
 				@currentView = null
 
 			routes:
+				'admin': 'adminDirect'
 				'admin/login': 'showAdminLogin'
 				'admin/dashboard': 'showAdminDashboard'
 			
@@ -34,6 +35,10 @@ define [
 			@navto 'AdminLoginView'
 		router.on 'route:showAdminDashboard', () ->
 			@navto 'AdminDashboardView'
+		router.on 'route:adminDirect', () ->
+			require ['backbone/AdminIndexController'], (controller) ->
+				i = new controller
+				i.initialize()
 		
 		Backbone.history.start({pushState: true, root: window.basepath})
 
