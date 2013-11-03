@@ -11,11 +11,7 @@ class AuthenticationControllerTest extends TestCase {
 			'email' => 'john@example.com',
 			'password' => 'invalid'
 		));
-		$this->assertTrue($response->isOk());
-
-		$result = json_decode($response->getContent());
-
-		$this->assertTrue(count($result) === 0);
+		$this->assertFalse($response->isOk());
 	}
 
 	public function testValid() {

@@ -21,7 +21,7 @@ class AuthenticationController extends BaseController {
         if ($user = $this->attempt($email, $password)) {
         	return Response::json($this->user->getCurrentUser(), 200);
         } else {
-        	return Response::json(array(), 200);
+        	return Response::json(array(), 401);
         }
 	}
 
@@ -50,7 +50,7 @@ class AuthenticationController extends BaseController {
 	 */
 	public function current() {
 		if (Auth::guest()) {
-			return Response::json(array(), 200);
+			return Response::json(array(), 401);
 		} else {
 			return Response::json($this->user->getCurrentUser(), 200);
 		}
