@@ -4,11 +4,13 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.0.*"
+		"laravel/framework": "4.0.*",
+		"jenssegers/mongodb": "1.0.*"
 	},
     "require-dev": {
         "mockery/mockery": "0.8.0",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "way/generators": "dev-master"
     },
 	"autoload": {
 		"classmap": [
