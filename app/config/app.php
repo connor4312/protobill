@@ -115,6 +115,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'Jenssegers\Mongodb\MongodbServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
 	),
 
 	/*
