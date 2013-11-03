@@ -3,6 +3,8 @@ define [
 	'backbonejs'
 ], (_, Backbone) ->
 
+	instance = null
+
 	init = () ->
 		insertRoutes = {}
 		currentView = null
@@ -13,6 +15,7 @@ define [
 
 			routes:
 				'admin/login': 'showAdminLogin'
+				'admin/dashboard': 'showAdminDashboard'
 			
 			navto: (view) ->
 				if @currentView?
@@ -29,6 +32,8 @@ define [
 
 		router.on 'route:showAdminLogin', () ->
 			@navto 'AdminLoginView'
+		router.on 'route:showAdminDashboard', () ->
+			@navto 'AdminDashboardView'
 		
 		Backbone.history.start({pushState: true, root: window.basepath})
 

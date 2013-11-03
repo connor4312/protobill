@@ -21,7 +21,7 @@ define [
 				success: (data) =>
 					@set data
 					onSuccess()
-				fail: onFail
+				error: onFail
 				always: always
 	
 	return new AdminAuthUserModel

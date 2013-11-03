@@ -28,7 +28,7 @@ define [
 				User.authenticate () =>
 						@nestView 'backbone/ErrorMessageView', (view) ->
 							return new view this, 'success', 'Logging you in...'
-						Router().navigate('/dashboard')
+						Router().navigate 'admin/dashboard', {trigger: true}
 					, () =>
 						@nestView 'backbone/ErrorMessageView', (view) ->
 							return new view this, 'danger', 'Invalid username or password!'

@@ -193,12 +193,6 @@ define [
 			success = if errors.length then false else true
 			return { success: success, errors: errors }
 
-		name: => 
-			if @collection?.name
-				return @collection.name
-			else
-				throw new Error "Socket model has no name (#{@.collection})"
-
 	return {
 		View: BaseView
 		ViewFX: ViewFX
