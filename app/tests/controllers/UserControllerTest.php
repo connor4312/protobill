@@ -3,7 +3,7 @@
 class UserControllerTest extends TestCase {
 
 	public function __construct() {
-		Auth::loginUsingId(1);
+		// Auth::loginUsingId(1);
 	}
 
 	public function testAll() {
