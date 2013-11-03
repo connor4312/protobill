@@ -11,13 +11,11 @@
 |
 */
 
-App::bind('Repository\UserRepositoryInterface', 'Repository\EloquentUserRepository');
-
-Route::get('/', function()
-{
-	return View::make('hello');
-});
 
 Route::group(array('prefix' => '/api'), function() {
 	Route::resource('user', 'UsersController');
 });
+
+Route::get('/{path?}', function() {
+	return View::make('page');
+})->where('path', '.*');

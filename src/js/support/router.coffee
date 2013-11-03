@@ -12,9 +12,7 @@ define [
 				@currentView = null
 
 			routes:
-				'login': 'showLogin'
-				'register': 'showRegister'
-				'dashboard': 'showDashboard'
+				'admin/login': 'showAdminLogin'
 			
 			navto: (view) ->
 				if @currentView?
@@ -29,10 +27,9 @@ define [
 
 		router = new AppRouter
 
-		router.on 'route:showLogin', () ->
-			console.log 'Nav to login'
-			@navto 'LoginView'
-
+		router.on 'route:showAdminLogin', () ->
+			@navto 'AdminLoginView'
+		
 		Backbone.history.start({pushState: true, root: window.basepath})
 
 		return router

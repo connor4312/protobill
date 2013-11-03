@@ -33,6 +33,16 @@ ClassLoader::addDirectories(array(
 $logFile = 'log-'.php_sapi_name().'.txt';
 
 Log::useDailyFiles(storage_path().'/logs/'.$logFile);
+/*
+|--------------------------------------------------------------------------
+| Application Bindings
+|--------------------------------------------------------------------------
+|
+| Bindings to the IoC container go here!
+|
+*/
+
+App::bind('Repository\UserRepositoryInterface', 'Repository\EloquentUserRepository');
 
 /*
 |--------------------------------------------------------------------------
