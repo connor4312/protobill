@@ -3,11 +3,16 @@ define [
 	'backbone/BaseClasses'
 	'backbone/AdminAuthUserModel'
 	'support/router'
-	'backbone/AdminLayoutView'
 ], ($, BaseClasses, User, Router) ->
 	
 	class view extends BaseClasses.ViewFX
-		el: $ '#subpage'
-		template: "admin/dashboard.html"
+		el: $ '#page'
+		template: "admin/layout.html"
 
-	return view
+		initialize: () ->
+			@render()
+
+		render: () ->
+			@renderTemplate { user: User}
+
+	return new view

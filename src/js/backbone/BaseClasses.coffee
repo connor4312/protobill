@@ -24,7 +24,7 @@ define [
 			e.element.unbind(e.ev) for e in @binding
 			@remove()
 
-		renderTemplate: (params, template, $element) ->
+		renderTemplate: (params = {}, template = @template, $element = @$el) ->
 			$element.html @loadTemplate(template, params)
 			@bind 'a[href^="!"]', 'click', (e) ->
 				e.preventDefault()

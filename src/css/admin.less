@@ -1,9 +1,14 @@
 
+@import "../../node_modules/twitter-bootstrap-3.0.0/less/variables.less";
 @import "support/variables.less";
+@import "../../node_modules/twitter-bootstrap-3.0.0/less/mixins.less";
 
 body {
 	background: url('../img/adminbackground.jpg');
 }
+
+@content-box-ds: 0 20px 100px rgba(0, 0, 0, 0.5);
+
 .pagecontainer {
 	top: 50%;
 	left: 50%;
@@ -14,7 +19,7 @@ body {
 	.container-body {
 		background: #fff;
 		padding: 10px 20px;
-		box-shadow: 0 20px 100px rgba(0, 0, 0, 0.5);
+		box-shadow: @content-box-ds;
 		border-radius: 0 0 @border-radius-base @border-radius-base;
 		position: relative;
 
@@ -42,5 +47,50 @@ body {
 			font-size: 1.5em;
 			margin:0;
 		}
+	}
+}
+
+#adminlayoutcontainer {
+	margin: 0 20px;
+	background: #eee;
+	padding: 0 15px;
+	box-shadow: @content-box-ds;
+}
+
+#headbar {
+	background: #fff;
+	color: #aaa;
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
+
+	h2 {
+		font-weight: 100;
+		margin: 0;
+		line-height: 48px;
+		color: #999;
+	}
+}
+#sidebar {
+	@background: #222f40;
+	background: @background;
+
+	a {
+		color: #b2bbc5;
+	}
+
+	.nav { 
+		margin-bottom: 5px;
+	}
+
+	.nav > li > a {
+		padding: 9px 15px;
+		margin-bottom: 10px;
+		background: @background;
+		.transition(0.2s);
+	}
+
+	.nav > li > a:hover, .nav > li.active a {
+		background: @nav-link-hover-bg;
+		color: #fff;
+		.transition(0.2s);
 	}
 }
