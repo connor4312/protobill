@@ -7,8 +7,7 @@ define [
 	class AdminAuthUserModel extends BaseClasses.Model
 		initialize: ->
 			@rules =
-				username: ['required', 'between:3,32']
-				password: ['required', 'between:3,32']
+				password: ['between:3,32']
 				email: ['email']
 
 		authenticate: (onSuccess, onFail, always) ->
