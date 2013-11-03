@@ -20,23 +20,10 @@ class UsersTableSeeder extends Seeder {
 				'country' => 'USA',
 				'phone' => '+123-456-1234',
 				'password' => '',
-				'credit' => 0
-			),
-			array(
-				'name_first' => 'Sherlock',
-				'name_last' => 'Holmes',
-				'company' => '',
-				'email' => 'john@example.com',
-				'address_1' => '221B Baker Street',
-				'address_2' => '',
-				'city' => 'London',
-				'state' => '',
-				'postcode' => 'NW1 6XE',
-				'country' => 'England',
-				'phone' => '+123-456-1234',
-				'password' => '',
-				'credit' => 100.05
-			),
+				'credit' => 0,
+				'created_at' => '2013-00-00 00:00:00',
+				'updated_at' => '2013-00-00 00:00:00'
+			)
 		);
 
 		DB::table('users')->insert($users);

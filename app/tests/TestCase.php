@@ -19,14 +19,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	}
 
 	public function setUp() {
-
 		parent::setUp();
 
-		Artisan::call('migrate');
+        Artisan::call('migrate');
+        Artisan::call('db:seed');
+
 		Mail::pretend(true);
 	}
 
 	public function tearDown() {
 		parent::tearDown();
+
+		Artisan::call('migrate:reset');
+		Mockery::close();
 	}
 }

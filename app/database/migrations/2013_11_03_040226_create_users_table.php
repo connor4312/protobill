@@ -12,7 +12,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Users', function(Blueprint $table) {
+		Schema::create('users', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name_first', 45);
 			$table->string('name_last', 45);
@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->string('address_1', 100);
 			$table->string('address_2', 200)->default('');
 			$table->string('city', 45);
-			$table->string('state', 45);
+			$table->string('state', 45)->default('');
 			$table->string('postcode', 20);
 			$table->string('country', 45);
 			$table->string('phone', 20);
