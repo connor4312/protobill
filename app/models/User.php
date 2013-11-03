@@ -1,4 +1,4 @@
-<?php
+<?php use Model;
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;

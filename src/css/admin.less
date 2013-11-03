@@ -1,0 +1,43 @@
+
+@import "support/variables.less";
+
+.pagecontainer {
+	top: 50%;
+	left: 50%;
+	position: fixed;
+	width: 90%;
+	max-width: 1120px;
+
+	.container-body {
+		background: #fff;
+		padding: 10px 20px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+		border-radius: 0 0 6px 6px;
+		position: relative;
+
+		.js-loading {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 100;
+			background: url('../img/loading.gif') center center no-repeat #fff;
+			opacity: 0.5;
+			cursor: progress;
+		}
+	}
+
+	.container-header {
+		background: @brand-primary;
+		color: #fff;
+		padding: 10px 20px;
+		border-radius: 6px 6px 0 0;
+
+		h3 {
+			font-weight: 200;
+			font-size: 1.5em;
+			margin:0;
+		}
+	}
+}

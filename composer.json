@@ -1,8 +1,8 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
-	"license": "MIT",
+	"name": "connor4312/protobill",
+	"description": "Protobill Open Source Billing Solution",
+	"keywords": ["billing"],
+	"license": "MPL-2.0",
 	"require": {
 		"laravel/framework": "4.0.*",
 		"jenssegers/mongodb": "1.0.*"

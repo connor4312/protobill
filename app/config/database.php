@@ -64,6 +64,11 @@ return array(
 			'password' => 'protobill',
 			'database' => 'protobill'
 		),
+        'testing' => array(
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => ''
+        )
 	),
 
 	/*
