@@ -4,6 +4,7 @@
   "description": "Protobill Open Source Billing Solution",
   "main": "Gruntfile.js",
   "dependencies": {
+    "grunt": "latest",
     "twitter-bootstrap-3.0.0": "latest",
     "grunt-contrib-concat": "latest",
     "grunt-contrib-uglify": "latest",
@@ -11,11 +12,7 @@
     "grunt-contrib-coffee": "latest",
     "grunt-contrib-jst": "latest",
     "grunt-contrib-copy": "latest",
-    "grunt-contrib-clean": "latest",
-    "grunt-contrib-connect": "latest",
-    "grunt-contrib-jasmine": "latest",
-    "grunt-template-jasmine-requirejs": "latest",
-    "grunt": "latest"
+    "grunt-contrib-clean": "latest"
   },
   "repository": {
     "type": "git",
@@ -27,6 +24,9 @@
     "url": "https://github.com/connor4312/protobill/issues"
   },
   "devDependencies": {
-    "grunt-contrib-jasmine": "~0.5.2"
+    "grunt-contrib-connect": "latest",
+    "grunt-contrib-jasmine": "latest",
+    "grunt-template-jasmine-requirejs": "latest",
+    "squirejs": "latest"
   }
 }
