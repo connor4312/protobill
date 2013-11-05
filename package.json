@@ -7,6 +7,7 @@
     "grunt": "latest",
     "twitter-bootstrap-3.0.0": "latest",
     "font-awesome": "git://github.com/FortAwesome/Font-Awesome.git",
+    "flot": "git://github.com/flot/flot.git",
     "grunt-contrib-concat": "latest",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-less": "latest",

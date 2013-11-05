@@ -28,6 +28,13 @@ module.exports = function(grunt) {
         src: ['**/*.js'],
         dest: 'public/js',
         ext: '.js'
+      },
+      flot: {
+        expand: true,
+        cwd: '.tmp/js/flot',
+        src: ['node_modules/flot/jquery.flot*.js'],
+        dest: 'public/js',
+        ext: '.js'
       }
     },
     copy: {
