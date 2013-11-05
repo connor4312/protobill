@@ -25,91 +25,91 @@ define [
 			model = new TestModel
 			model.set 'required', 'foo'
 
-		it "enforces required", () ->
+		it "validation enforces required", () ->
 			model.unset 'required'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows required", () ->
+		it "validation allows required", () ->
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces between", () ->
+		it "validation enforces between", () ->
 			model.set 'between', 'foo'
 			expect(model.validate().success).toEqual(false);
 			model.set 'between', 'fooooooooooo'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows between", () ->
+		it "validation allows between", () ->
 			model.set 'between', 'foooooo'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces alpha", () ->
+		it "validation enforces alpha", () ->
 			model.set 'alpha', 'Foo!'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows alpha", () ->
+		it "validation allows alpha", () ->
 			model.set 'alpha', 'Foo'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces alpha_dash", () ->
+		it "validation enforces alpha_dash", () ->
 			model.set 'alpha_dash', 'Foo!'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows alpha_dash", () ->
+		it "validation allows alpha_dash", () ->
 			model.set 'alpha_dash', 'Foo-Bar'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces alpha_int", () ->
+		it "validation enforces alpha_int", () ->
 			model.set 'alpha_int', 'Foo!'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows alpha_int", () ->
+		it "validation allows alpha_int", () ->
 			model.set 'alpha_int', 'Foo15'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces alpha_num", () ->
+		it "validation enforces alpha_num", () ->
 			model.set 'alpha_num', 'Foo!'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows alpha_num", () ->
+		it "validation allows alpha_num", () ->
 			model.set 'alpha_num', 'Foo1.5'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces url", () ->
+		it "validation enforces url", () ->
 			model.set 'url', 'http://example .com'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows url", () ->
+		it "validation allows url", () ->
 			model.set 'url', 'http://example.com'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces integer", () ->
+		it "validation enforces integer", () ->
 			model.set 'integer', '1.5'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows integer", () ->
+		it "validation allows integer", () ->
 			model.set 'integer', '15'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces numeric", () ->
+		it "validation enforces numeric", () ->
 			model.set 'numeric', '1.5!'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows numeric", () ->
+		it "validation allows numeric", () ->
 			model.set 'numeric', '1.5'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces confirm", () ->
+		it "validation enforces confirm", () ->
 			model.set 'confirm', 'no'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows confirm", () ->
+		it "validation allows confirm", () ->
 			model.set 'confirm', 'yes'
 			expect(model.validate().success).toEqual(true);
 		
-		it "enforces email", () ->
+		it "validation enforces email", () ->
 			model.set 'email', 'test@example'
 			expect(model.validate().success).toEqual(false);
 
-		it "allows email", () ->
+		it "validation allows email", () ->
 			model.set 'email', 'test@example.com'
 			expect(model.validate().success).toEqual(true);
