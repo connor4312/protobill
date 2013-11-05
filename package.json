@@ -12,6 +12,9 @@
     "grunt-contrib-jst": "latest",
     "grunt-contrib-copy": "latest",
     "grunt-contrib-clean": "latest",
+    "grunt-contrib-connect": "latest",
+    "grunt-contrib-jasmine": "latest",
+    "grunt-template-jasmine-requirejs": "latest",
     "grunt": "latest"
   },
   "repository": {
@@ -24,9 +27,6 @@
     "url": "https://github.com/connor4312/protobill/issues"
   },
   "devDependencies": {
-    "grunt-contrib-jasmine": "latest",
-    "grunt-contrib-connect": "latest",
-    "grunt-template-jasmine-requirejs": "latest",
-    "squirejs": "latest"
+    "grunt-contrib-jasmine": "~0.5.2"
   }
 }
