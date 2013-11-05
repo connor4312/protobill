@@ -31,11 +31,17 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      main: {
+      labs: {
         expand: true,
         cwd: 'src/lib',
         dest: 'public/lib',
         src: ['**/*.js']
+      },
+      fonts: {
+        expand: true,
+        cwd: 'node_modules/font-awesome/fonts',
+        dest: 'public/fonts',
+        src: ['*.*']
       },
     },
     less: {

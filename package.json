@@ -6,6 +6,7 @@
   "dependencies": {
     "grunt": "latest",
     "twitter-bootstrap-3.0.0": "latest",
+    "font-awesome": "git://github.com/FortAwesome/Font-Awesome.git", // font-awesome npm version is out of date and broken currently :/
     "grunt-contrib-concat": "latest",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-less": "latest",
