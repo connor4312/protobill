@@ -17,6 +17,7 @@ define [
 				'admin': 'adminDirect'
 				'admin/login': 'showAdminLogin'
 				'admin/dashboard': 'showAdminDashboard'
+				':foo': 'fourohfour'
 			
 			navto: (view) ->
 				if @currentView?
@@ -36,10 +37,12 @@ define [
 		router.on 'route:showAdminDashboard', () ->
 			@navto 'AdminDashboardView'
 		router.on 'route:adminDirect', () ->
-			require ['backbone/AdminIndexController'], (controller) ->
-				i = new controller
-				i.initialize()
-		
+			require ['backbone/AdminAccessFilter'], (filter) ->
+				filter()
+
+		router.on 'route:fourohforu', () ->
+			console.log '404'
+
 		Backbone.history.start({pushState: true, root: window.basepath})
 
 		return router
