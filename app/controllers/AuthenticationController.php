@@ -2,10 +2,10 @@
 
 class AuthenticationController extends BaseController {
 
-	protected $user;
+	protected $auth;
 
-	public function __construct(Repository\UserRepositoryInterface $users) {
-		$this->user = $users;
+	public function __construct(Repository\AuthenticationRepositoryInterface $auth) {
+		$this->auth = $auth;
 	}
 
 	/**
@@ -13,34 +13,13 @@ class AuthenticationController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		$email = Input::get('email');
-		$password = Input::get('password');
-
-        if ($user = $this->attempt($email, $password)) {
-        	return Response::json($this->user->getCurrentUser(), 200);
-        } else {
-        	return Response::json(array(), 401);
-        }
-	}
-
-	/**
-	 * Authenticates the user, returning true on success
-	 * 
-	 * @param string $email
-	 * @param string $password
-	 * @return bool
-	 */
-	protected function attempt($email, $password) {
-
-		$data = compact('email', 'password');
-
-		if (Auth::attempt($data)) {
-			return true;
+	public function index() {
+		
+		if ($user = $this->auth->validate(Input::get('email'), Input::get('password'))) {
+			return Response::json($out, 200);
+		} else {
+			return Response::json(array(), 401);
 		}
-
-		return false;
 	}
 
 	/**
@@ -49,10 +28,10 @@ class AuthenticationController extends BaseController {
 	 * @return Response
 	 */
 	public function current() {
-		if (Auth::guest()) {
-			return Response::json(array(), 401);
+		if ($user = $this->auth->current()) {
+			return Response::json($user, 200);
 		} else {
-			return Response::json($this->user->getCurrentUser(), 200);
+			return Response::json(array(), 401);
 		}
 	}
 
@@ -63,10 +42,7 @@ class AuthenticationController extends BaseController {
 	 */
 	public function logout() {
 
-		Auth::logout();
-
-		Session::flush();
-		Session::regenerate();
+		$this->auth->logout()
 
 		return Response::json(array(), 200);
 	}
