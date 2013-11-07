@@ -33,6 +33,7 @@ ClassLoader::addDirectories(array(
 $logFile = 'log-'.php_sapi_name().'.txt';
 
 Log::useDailyFiles(storage_path().'/logs/'.$logFile);
+
 /*
 |--------------------------------------------------------------------------
 | Application Bindings
@@ -43,6 +44,7 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 */
 
 App::bind('Repository\UserRepositoryInterface', 'Repository\EloquentUserRepository');
+App::bind('Repository\AuthenticationRepositoryInterface', 'Repository\AuthAuthenticationRepository');
 
 /*
 |--------------------------------------------------------------------------
