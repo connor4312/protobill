@@ -4,29 +4,32 @@ use Response;
 
 abstract class PermissionsLayer {
 
-	/** @type \Mode\User|null The context permissions will be checked in */
+	/**
+	 * @var \Mode\User|null The context permissions will be checked in
+	 */
 	protected $permissionsUser;
 
 	/**
-	 * @type array
-	 * 
 	 * This is the grand array of permissions. Key should be method names
 	 * to apply to. Values may be strings, functions, or arrays of both.
-	 * Funtions have an array of arguments passed in, and are expected to
-	 * return an array. For example, the following key would restrict
-	 * access to function `bar` to Admin users who have the permission
-	 * AccessBar. It also has a filter function that passes the args
-	 * without modification.
+	 * Funtions have an array of arguments passed in by reference,  and
+	 * are expected to return a boolean (false to deny the request).
+	 * For example, the following key would restrict access to
+	 * function `bar` to Admin users who have the permission
+	 * AccessBar. It also has a filter function that allows
+	 * all requests and does not modify the arguments.
 	 * 
 	 * 	'bar' => array(
 	 * 		'HasRole:Admin',
 	 * 		'Can:AccessBar',
-	 * 		function($args) { return $args; }
+	 * 		function(&$args) { return true; }
 	 * 	);
 	 * 
 	 * Rules are checked and arguments are filtered in the order in
 	 * which they are defined. Methods not defined herein
 	 * cannot be called.
+	 * 
+	 * @var array
 	 */
 	protected $permissions = array();
 
@@ -34,7 +37,7 @@ abstract class PermissionsLayer {
 	 * Sets the user to use for permissions checking
 	 * 
 	 * @param \Model\User
-	 * @return PermissionsLayer
+	 * @return self
 	 */
 
 	public function setUserContext($user) {
@@ -111,24 +114,37 @@ abstract class PermissionsLayer {
 	}
 
 	/**
-	 * Processes the give rule or filter, returning false on failure
+	 * Processes the give rule or filter, returning
+	 * the results of the filter
 	 * 
-	 * @param mixed $rule
+	 * @param string|closure $rule
 	 * @param array &$arguments
 	 * @return bool
 	 */
 	protected function processRule($rule, &$arguments) {
 
 		if (is_string($rule)) {
-			list($directive, $param) = explode(':', $rule, 1);
-			$filterMethodName = 'permission' . $directive;
-
-			return $this->$filterMethodName($param);
+			return $this->processStringRule($rule, $arguments);
 		} else {
-			$arguments = $rule($arguments);
+			return $rule($arguments);
 		}
 
 		return true;
+	}
+
+	/**
+	 * Dispatch the rule defined by the given string, returning results
+	 * 
+	 * @param string $rule
+	 * @param array $arguments
+	 * @return bool
+	 */
+	protected function processStringRule($rule, $arguments) {
+
+		list($directive, $param) = explode(':', $rule, 1);
+		$filterMethodName = 'permission' . $directive;
+
+		return $this->$filterMethodName($param);
 	}
 
 	/**

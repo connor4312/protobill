@@ -42,7 +42,7 @@ class AuthenticationController extends BaseController {
 	 */
 	public function logout() {
 
-		$this->auth->logout()
+		$this->auth->logout();
 
 		return Response::json(array(), 200);
 	}
