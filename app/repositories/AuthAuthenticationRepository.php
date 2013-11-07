@@ -2,7 +2,7 @@
 
 class AuthAuthenticationRepository implements AuthenticationRepositoryInterface {
 
-	public function __construct(Repository\UserRepositoryInterface $user) {
+	public function __construct(UserRepositoryInterface $user) {
 		$this->user = $user;
 	}
 
