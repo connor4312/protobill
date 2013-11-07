@@ -39,10 +39,14 @@ define [
 
 		afterRender: (params, template, $element) ->
 
-		bind: (el, ev, handler) ->
-			$elem = $(el)
-			$elem.bind ev, handler
-			@binding.push { element: $elem, ev: ev }
+		bind: (elem, ev, handler) ->
+			if _.isString(elem)
+				$el = $(elem)
+			else 
+				$el = elem
+
+			$el.bind ev, handler
+			@binding.push { element: $el, ev: ev }
 
 		handleResponse: (data) ->
 
