@@ -16,7 +16,7 @@ class AuthenticationController extends BaseController {
 	public function index() {
 		
 		if ($user = $this->auth->validate(Input::get('email'), Input::get('password'))) {
-			return Response::json($out, 200);
+			return Response::json($user, 200);
 		} else {
 			return Response::json(array(), 401);
 		}

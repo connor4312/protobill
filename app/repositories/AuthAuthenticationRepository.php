@@ -1,5 +1,8 @@
 <?php namespace Repository;
 
+use Auth;
+use Session;
+
 class AuthAuthenticationRepository implements AuthenticationRepositoryInterface {
 
 	public function __construct(UserRepositoryInterface $user) {
