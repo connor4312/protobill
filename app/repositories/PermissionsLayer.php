@@ -34,12 +34,29 @@ abstract class PermissionsLayer {
 	protected $permissions = array();
 
 	/**
+	 * Modifies the permissions array
+	 * 
+	 * @param string|array $permissions If an array, it will be merged with
+	 *                                  existing permissions array.
+	 * @param array $value
+	 * @return self
+	 */
+	public function setPermission($permission, $value = array()) {
+		if (is_array($permission)) {
+			$this->permissions = array_merge_recursive($this->permissions, $permission);
+		} else {
+			$this->permissions[$permission] = $value;
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Sets the user to use for permissions checking
 	 * 
 	 * @param \Model\User
 	 * @return self
 	 */
-
 	public function setUserContext($user) {
 
 		$this->permissionsUser = $user;
@@ -141,15 +158,36 @@ abstract class PermissionsLayer {
 	 */
 	protected function processStringRule($rule, $arguments) {
 
-		list($directive, $param) = explode(':', $rule, 1);
+		list($directive, $params) = $this->parseRuleString($rule);
 		$filterMethodName = 'permission' . $directive;
 
-		return $this->$filterMethodName($param);
+		return call_user_func_array(array($this, $filterMethodName), $params);
 	}
 
 	/**
-	 * Magic method designed to filter and restict
-	 * access to protected methods
+	 * Explodes the rule string and returns an array of directive
+	 * (first elem) and any applicable arguments (second elem)
+	 * 
+	 * @param string $rule
+	 * @return array
+	 */
+	protected function parseRuleString($rule) {
+
+		$parts = explode(':', $rule, 2);
+
+		$directive = $parts[0];
+		if (count($parts) == 1) {
+			$params = array();
+		} else {
+			$params = explode(',', $parts[1]);
+		}
+
+		return array($directive, $params);
+	}
+
+	/**
+	 * Magic method designed to catch and filter calls to
+	 * protected methods of child classes
 	 * 
 	 * @param string $method
 	 * @param array $arguments
@@ -157,8 +195,20 @@ abstract class PermissionsLayer {
 	 */
 	function __call($method, $arguments) {
 
+		return $this->executePermission($method, $arguments);
+	}
+
+	/**
+	 * Executes the given method and arguments on the child class
+	 * 
+	 * @param string $method
+	 * @param array $arguments
+	 * @return mixed
+	 */
+	protected function executePermission($method, $arguments) {
+
 		if ($this->permissionCanAccess($method, $arguments)) {
-			return call_user_method_array($method, $this, $arguments);
+			return call_user_func_array(array($this, $method), $arguments);
 		} else {
 			return Response::json(array(), 403);
 		}
