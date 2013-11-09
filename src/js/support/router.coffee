@@ -17,6 +17,7 @@ define [
 				'admin': 'adminDirect'
 				'admin/login': 'showAdminLogin'
 				'admin/dashboard': 'showAdminDashboard'
+				'admin/permissions': 'showAdminPermissions'
 				':foo': 'fourohfour'
 			
 			navto: (view) ->
@@ -34,8 +35,13 @@ define [
 
 		router.on 'route:showAdminLogin', () ->
 			@navto 'AdminLoginView'
+
 		router.on 'route:showAdminDashboard', () ->
 			@navto 'AdminDashboardView'
+
+		router.on 'route:showAdminPermissions', () ->
+			@navto 'AdminPermissionView'
+
 		router.on 'route:adminDirect', () ->
 			require ['backbone/AdminAccessFilter'], (filter) ->
 				filter()
