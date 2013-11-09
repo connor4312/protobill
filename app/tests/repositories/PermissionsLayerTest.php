@@ -19,7 +19,7 @@ class PermissionsLayerTest extends TestCase {
 		if ($this->user) {
 			return $this->user;
 		}
-
+		
 		return $this->user = \Model\User::find(1);
 	}
 
@@ -30,12 +30,12 @@ class PermissionsLayerTest extends TestCase {
 		}
 
 		$admin = new \Model\Role;
-		$admin->name = 'Superuser';
+		$admin->name = 'Demorole';
 		$admin->save();
 
 		$managePerms = new \Model\Permission;
-		$managePerms->name = 'manage_permissions';
-		$managePerms->display_name = 'Manage Permissions';
+		$managePerms->name = 'demo_permission';
+		$managePerms->display_name = 'Demo Permission';
 		$managePerms->save();
 
 		$admin->perms()->sync(array($managePerms->id));
@@ -89,7 +89,7 @@ class PermissionsLayerTest extends TestCase {
 	public function testEntrustRoleAllows() {
 
 		$layer = $this->layer()
-			->setPermission(array('bar' => 'HasRole:Superuser'))
+			->setPermission(array('bar' => 'HasRole:Demorole'))
 			->setUserContext($this->roledUser());
 
 		$this->assertTrue($layer->bar() == 'foo');
@@ -107,7 +107,7 @@ class PermissionsLayerTest extends TestCase {
 	public function testEntrustCanAllows() {
 
 		$layer = $this->layer()
-			->setPermission(array('bar' => 'Can:manage_permissions'))
+			->setPermission(array('bar' => 'Can:demo_permission'))
 			->setUserContext($this->roledUser());
 
 		$this->assertTrue($layer->bar() == 'foo');

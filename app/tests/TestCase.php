@@ -33,4 +33,14 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 		Artisan::call('migrate:reset');
 		Mockery::close();
 	}
+
+	protected function parseJson($response)
+	{
+		return json_decode($response->getContent());
+	}
+
+	protected function assertIsJson($data)
+	{
+		$this->assertEquals(0, json_last_error());
+	}
 }

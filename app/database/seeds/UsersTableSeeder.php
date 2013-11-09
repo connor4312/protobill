@@ -4,7 +4,7 @@ class UsersTableSeeder extends Seeder {
 
 	public function run()
 	{
-		DB::table('users')->truncate();
+		DB::table('users')->delete();
 
 		$users = array(
 			array(
@@ -21,8 +21,8 @@ class UsersTableSeeder extends Seeder {
 				'phone' => '+123-456-1234',
 				'password' => Hash::make('seekrit123'),
 				'credit' => 0,
-				'created_at' => '2013-00-00 00:00:00',
-				'updated_at' => '2013-00-00 00:00:00'
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
 			)
 		);
 
