@@ -18,7 +18,7 @@ define [
 		checkUser: (e) ->
 			$form = $ e.currentTarget
 			e.preventDefault()
-			@startLoading()
+			@startLoading $('.container-body', @$el)
 
 			User.loadAttribsFrom $form
 
@@ -32,10 +32,10 @@ define [
 					, () =>
 						@nestView 'backbone/ErrorMessageView', (view) ->
 							return new view this, 'danger', 'Invalid username or password!'
-						@endLoading()
+						@endLoading $('.container-body', @$el)
 					, () =>
 			fail = () =>
-				@endLoading()
+				@endLoading $('.container-body', @$el)
 
 			@formErrors User.validate(), $form, success, fail
 

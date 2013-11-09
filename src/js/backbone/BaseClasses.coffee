@@ -40,10 +40,10 @@ define [
 		afterRender: (params, template, $element) ->
 
 		bind: (elem, ev, handler) ->
-			if _.isString(elem)
-				$el = $(elem)
-			else 
+			if elem instanceof $
 				$el = elem
+			else 
+				$el = $(elem)
 
 			$el.bind ev, handler
 			@binding.push { element: $el, ev: ev }
@@ -78,14 +78,14 @@ define [
 
 			$el.stop().animate(props, duration, easing, complete)
 
-		startLoading: () ->
-			$('.container-body .js-loading', @$el).remove()
-			$loading = $('<div class="js-loading"></div>');
-			$('.container-body ', @$el).append($loading)
+		startLoading: ($el) ->
+			$('> .js-loading', $el).remove()
+			$loading = $('<div class="js-loading"></div>')
+			$($el).append($loading)
 			$loading.fadeOut(0).fadeIn(200)
 
-		endLoading: () ->
-			$('.container-body .js-loading', @$el).stop().fadeOut 200, () ->
+		endLoading: ($el) ->
+			$('> .js-loading', $el).stop().fadeOut 200, () ->
 				@remove()
 
 		submitForm: (e) ->
