@@ -57,7 +57,10 @@ define [
 			@_fuse = new Fuse _.pluck(@collection.models, 'attributes'), { keys: options.keys ? @fields, threshold: 0.2 }
 
 		search: (query) ->
-			@showResults @_fuse.search(query), query
+			if query is ''
+				@showResults _.pluck(@collection.models, 'attributes'), query
+			else
+				@showResults @_fuse.search(query), query
 
 
 	return AdminFuzzySearchView

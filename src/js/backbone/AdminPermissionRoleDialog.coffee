@@ -3,16 +3,7 @@ define [
 	'backbone/BaseClasses'
 ], ($, BaseClasses) ->
 	
-	class AdminPermissionRoleDialog extends BaseClasses.ViewFX
+	class AdminPermissionRoleDialog extends BaseClasses.DialogBoxView
 		template: "admin/permissionRoleDialog.html"
-
-		initialize: (options) ->
-			@el = options.container
-			@cb = options.callback ? () ->
-			
-			@render()
-
-		afterRender: ()->
-			@cb()
 
 	return AdminPermissionRoleDialog

@@ -31,7 +31,7 @@ define [
 			$(element).html @loadTemplate(template, params)
 			@bind 'a[href^="!"]', 'click', (e) ->
 				e.preventDefault()
-				Router().navigate $(@).attr('href').replace(/!\/?/g, '')
+				Router().navigate $(@).attr('href').replace(/!\/?/g, ''), true
 			return this
 
 		render: (params = {}, template = @template, $element = @el) ->
@@ -62,6 +62,17 @@ define [
 
 		handleError: (data) =>
 
+	class DialogBoxView extends BaseView
+
+		initialize: (options) ->
+			@el = options.container
+			@cb = options.callback ? () ->
+			
+			@render()
+
+		afterRender: ()->
+			@cb()
+
 	class ViewFX extends BaseView
 		centerElements: ($element = @el) ->
 			center = () ->
@@ -89,13 +100,13 @@ define [
 			$el.stop().animate(props, duration, easing, complete)
 
 		startLoading: ($el = @el) ->
-			$('> .js-loading', $el).remove()
+			$('.js-loading', $el).remove()
 			$loading = $('<div class="js-loading"></div>')
 			$($el).append($loading)
 			$loading.fadeOut(0).fadeIn(200)
 
 		endLoading: ($el = @el) ->
-			$('> .js-loading', $el).stop().fadeOut 200, () ->
+			$('.js-loading', $el).stop().fadeOut 200, () ->
 				@remove()
 
 		submitForm: (e) ->
@@ -212,6 +223,7 @@ define [
 
 	return {
 		View: BaseView
+		DialogBoxView: DialogBoxView
 		ViewFX: ViewFX
 		Model: Model
 	}
