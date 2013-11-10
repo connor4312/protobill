@@ -5,7 +5,7 @@ class RoleControllerTest extends TestCase {
 
 	public function testIndex() {
 		$mock = Mockery::mock('Repository\RoleRepositoryInterface');
-		$mock->shouldReceive('index')->once()->andReturn(Response::json(array(), 200));
+		$mock->shouldReceive('all')->once()->andReturn(Response::json(array(), 200));
 		App::instance('Repository\RoleRepositoryInterface', $mock);
 
 		$response = $this->call('GET', '/api/role');

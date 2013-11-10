@@ -30,7 +30,10 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		$role = new Role;
 		$role->name = $input['name'];
 		if ($role->save()) {
-			return $role;
+
+			$this->updatePermissionsLinks($id, $input['permissions']);
+			return $this->show($role->id);
+			
 		} else {
 			return Response::json(array(), 400);
 		}
@@ -43,7 +46,10 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		$role = Role::find($id);
 		$role->name = $input['name'];
 		if ($role->save()) {
-			return $role;
+
+			$this->updatePermissionsLinks($id, $input['permissions']);
+			return $this->show($role->id);
+			
 		} else {
 			return Response::json(array(), 400);
 		}
@@ -56,6 +62,45 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		} else {
 			return Response::json(array(), 400);
 		}
+	}
+
+	protected function roleLinkingTable() {
+		return DB::table('permission_role');
+	}
+
+	protected function updatePermissionsLinks($id, $input) {
+
+		$data = $this->getRoleList(function($query) use ($id) {
+			$query->where($this->roletable . '.id', $id);
+		});
+
+		$this->addPermissions($data['permissions'], $input, $id);
+		$this->deletePermissions($data['permissions'], $input, $id);
+	}
+
+	protected function addPermissions($existing, $new, $role_id) {
+
+		$addPermissions = array_diff($new, $existing);
+
+		$inserts = array();
+		foreach ($addPermissions as $permission_id) {
+			$inserts[] = compact('role_id', 'permission_id');
+		}
+
+		$this->roleLinkingTable()->insert($inserts);
+	}
+
+	protected function deletePermissions($existing, $new, $role_id) {+
+
+		$deletePermissions = array_diff($existing, $new);
+
+		$this->roleLinkingTable()
+			->where('role_id', $role_id)
+			->where(function() use ($deletePermissions) {
+				foreach ($deletePermissions as $permission_id) {
+					$query->where('permission_id', '=', $permission_id, 'or');
+				}
+			});
 	}
 
 	protected function getRoleList($modifier = null) {

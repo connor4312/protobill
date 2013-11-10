@@ -15,7 +15,7 @@ class RoleController extends BaseController {
 	 */
 	public function index()
 	{
-        return $this->roles->index();
+        return $this->roles->all();
 	}
 
 	/**
