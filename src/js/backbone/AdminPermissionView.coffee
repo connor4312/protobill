@@ -11,12 +11,15 @@ define [
 
 		initialize: () ->
 			@permissions = new Permissions
-			@permissions.fetch();
-			console.log(@permissions);
 
 		render: () ->
-			debugger;
 			@renderTemplate()
-			@startLoading @el
+			@startLoading()
+			fuzzybox = $('#js-fuzzypermsearch', @el)
+			@permissions.fetch
+				success: =>
+					@endLoading()
+					@nestView 'backbone/AdminFuzzySearchView', (view) =>
+						new view fuzzybox, @permissions, ['name', 'display_name'], '{name}: <b>{display_name}</b>'
 
 	return view

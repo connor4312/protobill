@@ -43,7 +43,7 @@ define [
 			if elem instanceof $
 				$el = elem
 			else 
-				$el = $(elem)
+				$el = $(elem, @$el)
 
 			$el.bind ev, handler
 			@binding.push { element: $el, ev: ev }
@@ -78,13 +78,13 @@ define [
 
 			$el.stop().animate(props, duration, easing, complete)
 
-		startLoading: ($el) ->
+		startLoading: ($el = @el) ->
 			$('> .js-loading', $el).remove()
 			$loading = $('<div class="js-loading"></div>')
 			$($el).append($loading)
 			$loading.fadeOut(0).fadeIn(200)
 
-		endLoading: ($el) ->
+		endLoading: ($el = @el) ->
 			$('> .js-loading', $el).stop().fadeOut 200, () ->
 				@remove()
 
