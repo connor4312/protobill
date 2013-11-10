@@ -70,9 +70,13 @@ body {
 		color: #999;
 	}
 }
+
+@sidebar-background: #222f40;
+
 #sidebar {
-	@background: #222f40;
-	background: @background;
+
+	z-index: 10;
+	position: relative;
 
 	a {
 		color: #b2bbc5;
@@ -85,7 +89,7 @@ body {
 
 	> ul > li {
 	
-		background: @background;
+		background: @sidebar-background;
 		.transition(0.2s);
 		border-radius: 5px;
 		margin: 10px 0;
@@ -128,6 +132,16 @@ body {
 			padding: 0px;
 		}
 	}
+}
+.row {
+	position: relative;
+}
+#sidebar-color {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	background: @sidebar-background;
 }
 
 .panel {
