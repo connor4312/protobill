@@ -41,7 +41,7 @@ define [
 				for replace in @replaces
 					input = result[replace.match(/[A-z_\-]+/g)[0]].split('')
 					spool = ''
-					debugger;
+					
 					for letter in input
 						if query.indexOf(letter.toLowerCase()) is -1
 							spool += letter

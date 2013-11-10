@@ -48,6 +48,14 @@ define [
 			$el.bind ev, handler
 			@binding.push { element: $el, ev: ev }
 
+		showDialog: (view, params = {}) ->
+			@nestView 'backbone/DialogBoxView', (DialogView) ->
+				return new DialogView {
+					view: view
+					func: (container, ContentView, callback) ->
+						new ContentView { container: container, params: params, callback: callback }
+				}
+
 		handleResponse: (data) ->
 
 		handleError: (data) =>
@@ -103,6 +111,8 @@ define [
 					$item = $('input[name="' + error.attr + '"]', $form).closest '.form-group'
 					$item.addClass('has-error').append('<span class="help-block js-help-block-error">' + error.message + '</span>')
 				fail()
+		stopPropagation: (e) ->
+			e.stopPropagation()
 
 	class Model extends Backbone.Model
 

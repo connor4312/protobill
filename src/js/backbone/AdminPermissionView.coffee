@@ -22,4 +22,10 @@ define [
 					@nestView 'backbone/AdminFuzzySearchView', (view) =>
 						new view fuzzybox, @permissions, ['name', 'display_name'], '{name}: <b>{display_name}</b>'
 
+		events:
+			'click #js-addrole': 'displaySelectionBox'
+
+		displaySelectionBox: () ->
+			@showDialog 'backbone/AdminPermissionRoleDialog'
+
 	return view
