@@ -9,6 +9,9 @@ define [
 		el: $ '#page'
 		template: "admin/login.html"
 
+		initialize: ->
+			@render()
+
 		afterRender: ->
 			@centerElements()
 
@@ -26,12 +29,12 @@ define [
 
 			success = () =>
 				User.authenticate () =>
-						@nestView 'backbone/ErrorMessageView', (view) ->
-							return new view this, 'success', 'Logging you in...'
+						@nestView 'backbone/ErrorMessageView', (ErrorMessage) ->
+							return new ErrorMessage { container: this, level: 'success', message: 'Logging you in...'}
 						Router().navigate 'admin/dashboard', {trigger: true}
 					, () =>
-						@nestView 'backbone/ErrorMessageView', (view) ->
-							return new view this, 'danger', 'Invalid username or password!'
+						@nestView 'backbone/ErrorMessageView', (ErrorMessage) ->
+							return new ErrorMessage { container: this, level: 'danger', message: 'Invalid username or password!'}
 						@endLoading $('.container-body', @el)
 					, () =>
 			fail = () =>

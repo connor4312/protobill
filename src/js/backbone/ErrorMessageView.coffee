@@ -4,12 +4,12 @@ define [
 ], ($, BaseClasses) ->
 	class ErrorMessage extends BaseClasses.View
 		template: "error.html"
-		initialize: (container, level, message, dismissable = true) ->
+		initialize: (options) ->
 
-			@$el = $ '.js-error', container.el
-			@render { level: level, message: message, dismissable: dismissable }
+			@el = $ '.js-error', options.container.el
+			@render { level: options.level, message: options.message, dismissable: options.dismissable ? true }
 
-		events:
-			'click .close': 'destroy'
+		afterRender: () ->
+			@bind '.close', 'click', @destroy
 
 	return ErrorMessage

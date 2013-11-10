@@ -26,7 +26,6 @@ define [
 					
 				require ['backbone/' + view], (view) ->
 					@currentView = new view
-					@currentView.render()
 
 				$('body').scrollTop 0
 

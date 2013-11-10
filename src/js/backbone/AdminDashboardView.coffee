@@ -10,4 +10,7 @@ define [
 		el: $ '#subpage'
 		template: "admin/dashboard.html"
 
+		initialize: ->
+			@render()
+
 	return view

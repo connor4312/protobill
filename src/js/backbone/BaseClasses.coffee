@@ -19,7 +19,7 @@ define [
 			require [view], (view) =>
 				@nestedViews.push func(view)
 
-		destroy: ->
+		destroy: =>
 			view.destroy() for view in @nestedViews
 			e.element.unbind(e.ev) for e in @binding
 			@binding = []

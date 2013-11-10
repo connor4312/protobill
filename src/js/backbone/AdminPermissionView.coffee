@@ -2,15 +2,20 @@ define [
 	'jquery'
 	'backbone/BaseClasses'
 	'backbone/AdminPermissionCollection'
+	'backbone/AdminPermissionRoleCollection'
 	'backbone/AdminLayoutView'
-], ($, BaseClasses, Permissions) ->
+], ($, BaseClasses, PermissionRoleCollection, PermissionCollection) ->
 	
 	class view extends BaseClasses.ViewFX
 		el: $ '#subpage'
 		template: "admin/permission.html"
 
 		initialize: () ->
-			@permissions = new Permissions
+			@permissions = new PermissionCollection
+			@roles = new PermissionRoleCollection
+			@roles.fetch
+				success: =>
+					@render { roles: @roles }
 
 		render: () ->
 			@renderTemplate()
