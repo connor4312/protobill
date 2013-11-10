@@ -3,16 +3,20 @@
 	"description": "Protobill Open Source Billing Solution",
 	"keywords": ["billing"],
 	"license": "MPL-2.0",
+	"repositories": [{
+		"type": "vcs",
+		"url": "https://github.com/connor4312/entrust"
+	}],
 	"require": {
 		"laravel/framework": "4.0.*",
 		"jenssegers/mongodb": "1.0.*",
-        "zizaco/entrust": "dev-master"
+		"zizaco/entrust": "dev-master"
 	},
-    "require-dev": {
-        "mockery/mockery": "0.8.0",
-        "phpunit/phpunit": "3.7.*",
-        "way/generators": "dev-master"
-    },
+	"require-dev": {
+		"mockery/mockery": "0.8.0",
+		"phpunit/phpunit": "3.7.*",
+		"way/generators": "dev-master"
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
