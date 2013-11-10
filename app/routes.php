@@ -15,6 +15,7 @@
 Route::group(array('prefix' => '/api'), function() {
 	Route::resource('user', 'UsersController');
 	Route::resource('permission', 'PermissionController', array('only' => array('index', 'show')));
+	Route::resource('role', 'RoleController', array('only' => array('index', 'show', 'update', 'destroy', 'store')));
 
 	Route::post('authenticate', 'AuthenticationController@index');
 	Route::post('authenticate/logout', 'AuthenticationController@logout');

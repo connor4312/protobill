@@ -46,6 +46,7 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 App::bind('Repository\UserRepositoryInterface', 'Repository\EloquentUserRepository');
 App::bind('Repository\PermissionRepositoryInterface', 'Repository\EloquentPermissionRepository');
 App::bind('Repository\AuthenticationRepositoryInterface', 'Repository\AuthAuthenticationRepository');
+App::bind('Repository\RoleRepositoryInterface', 'Repository\EloquentRoleRepository');
 
 /*
 |--------------------------------------------------------------------------

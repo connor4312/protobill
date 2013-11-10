@@ -10,7 +10,8 @@
 	"require": {
 		"laravel/framework": "4.0.*",
 		"jenssegers/mongodb": "1.0.*",
-		"zizaco/entrust": "dev-master"
+		"zizaco/entrust": "dev-master",
+		"way/database": "dev-master"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.8.0",
