@@ -9,7 +9,7 @@ define [
 		initialize: (options) ->
 			@el = options.container
 			@cb = options.callback ? () ->
-			debugger;
+			
 			@render()
 
 		afterRender: ()->

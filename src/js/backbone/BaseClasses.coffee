@@ -23,10 +23,11 @@ define [
 			view.destroy() for view in @nestedViews
 			e.element.unbind(e.ev) for e in @binding
 			@binding = []
+			$(@el).empty()
 			@remove()
 
 		renderTemplate: (params = {}, template = @template, element = @el) ->
-			
+
 			$(element).html @loadTemplate(template, params)
 			@bind 'a[href^="!"]', 'click', (e) ->
 				e.preventDefault()

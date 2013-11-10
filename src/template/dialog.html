@@ -1,5 +1,10 @@
 <div id="dialog-backdrop">
-	<div id="dialog-content" class="js-center">
-		
+	<div class="js-center">
+		<% if (dismissable) { %>
+			<button type="button" class="close for-panel">&times;</button>
+		<% } %>
+		<div id="dialog-content">
+			
+		</div>
 	</div>
 </div>

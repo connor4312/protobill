@@ -8,7 +8,6 @@ define [
 		template: "dialog.html"
 
 		initialize: (options) ->
-			console.log 'Its alive!'
 			@view = options.view
 			@func = options.func
 			@params = options.params ? {}
@@ -20,10 +19,9 @@ define [
 		afterRender: () ->
 			@nestView @view, (view) => @func($('#dialog-content'), view, () => @centerElements())
 
-		events:
-			'click .close': 'destroy'
-			'click #dialog-backdrop': 'destroy'
-			'click #dialog-content': 'stopPropagation'
+			@bind '.close', 'click', () => @destroy()
+			@bind '#dialog-backdrop', 'click', () => @destroy()
+			@bind '#dialog-content', 'click', (e) => @stopPropagation(e)
 
 
 	return DialogBoxView
