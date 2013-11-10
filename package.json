@@ -16,10 +16,13 @@
     "grunt-contrib-copy": "latest",
     "grunt-contrib-clean": "latest"
   },
-  "repository": {
+  "repository": [{
     "type": "git",
     "url": "https://github.com/connor4312/protobill.git"
-  },
+  },{
+    "type": "vcs",
+    "url": "https://github.com/connor4312/entrust"
+  }],
   "author": "Connor Peet",
   "license": "Proprietary",
   "bugs": {
