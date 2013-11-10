@@ -25,14 +25,15 @@ define [
 			@binding = []
 			@remove()
 
-		renderTemplate: (params = {}, template = @template, $element = @$el) ->
-			$element.html @loadTemplate(template, params)
+		renderTemplate: (params = {}, template = @template, element = @el) ->
+			
+			$(element).html @loadTemplate(template, params)
 			@bind 'a[href^="!"]', 'click', (e) ->
 				e.preventDefault()
 				Router().navigate $(@).attr('href').replace(/!\/?/g, '')
 			return this
 
-		render: (params = {}, template = @template, $element = @$el) ->
+		render: (params = {}, template = @template, $element = @el) ->
 			@renderTemplate params, template, $element
 			@afterRender params, template, $element
 			return this
@@ -43,7 +44,7 @@ define [
 			if elem instanceof $
 				$el = elem
 			else 
-				$el = $(elem, @$el)
+				$el = $(elem, @el)
 
 			$el.bind ev, handler
 			@binding.push { element: $el, ev: ev }
@@ -61,7 +62,7 @@ define [
 		handleError: (data) =>
 
 	class ViewFX extends BaseView
-		centerElements: ($element = @$el) ->
+		centerElements: ($element = @el) ->
 			center = () ->
 				$elem = $('.js-center', $element)
 				width = $elem.attr('data-width') or $elem.width()

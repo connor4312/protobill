@@ -13,7 +13,7 @@ define [
 			@func = options.func
 			@params = options.params ? {}
 
-			@$el = $("#js-message-container")
+			@el = $("#js-message-container")
 
 			@render { dismissable: dismissable ? true }
 

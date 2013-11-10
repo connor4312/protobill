@@ -9,9 +9,9 @@ define [
 
 		initialize: (el, collection, fields, schema) ->
 			if el instanceof $
-				@$el = el
+				@el = el
 			else 
-				@$el = $(el)
+				@el = $(el)
 
 			@collection = collection
 			@fields = fields
@@ -41,7 +41,7 @@ define [
 				for replace in @replaces
 					input = result[replace.match(/[A-z_\-]+/g)[0]].split('')
 					spool = ''
-					
+
 					for letter in input
 						if query.indexOf(letter.toLowerCase()) is -1
 							spool += letter
@@ -51,7 +51,7 @@ define [
 					schema = schema.replace replace, spool
 				content += '<li>' + schema + '</li>'
 
-			$('.js-fuzzyresults', @$el).html content
+			$('.js-fuzzyresults', @el).html content
 
 		rebuildIndex: (options = {}) ->
 			@_fuse = new Fuse _.pluck(@collection.models, 'attributes'), { keys: options.keys ? @fields, threshold: 0.2 }

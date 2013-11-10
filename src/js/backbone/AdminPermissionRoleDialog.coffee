@@ -7,7 +7,7 @@ define [
 		template: "admin/permissionRoleDialog.html"
 
 		initialize: (options) ->
-			@$el = options.container
+			@el = options.container
 			@cb = options.callback ? () ->
 			debugger;
 			@render()

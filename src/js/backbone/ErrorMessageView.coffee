@@ -4,9 +4,7 @@ define [
 ], ($, BaseClasses) ->
 	class ErrorMessage extends BaseClasses.View
 		template: "error.html"
-		initialize: (container, level, message, dismissable) ->
-
-			dismissable = true if not dismissable?
+		initialize: (container, level, message, dismissable = true) ->
 
 			@$el = $ '.js-error', container.el
 			@render { level: level, message: message, dismissable: dismissable }
