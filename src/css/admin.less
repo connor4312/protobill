@@ -1,6 +1,7 @@
 
 @import "../../node_modules/twitter-bootstrap-3.0.0/less/variables.less";
 @import "support/variables.less";
+@import "support/animations.less";
 @import "../../node_modules/twitter-bootstrap-3.0.0/less/mixins.less";
 
 body {
@@ -254,6 +255,7 @@ body {
 		}
 	}
 }
+
 #dialog-backdrop {
 	position: fixed;
 	top: 0px;
@@ -263,6 +265,11 @@ body {
 	z-index: 1000;
 	background: rgba(0, 0, 0, 0.5);
 	box-shadow: inset 0 0 256px rgba(0, 0, 0, 0.8);
+
+	-webkit-animation: fadein 0.5s;
+	-moz-animation: fadein 0.5s;
+	-ms-animation: fadein 0.5s;
+	animation: fadein 0.5s;
 
 	#dialog-content {
 		width: 400px;
