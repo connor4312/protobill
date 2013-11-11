@@ -1,9 +1,9 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
-	'backbone/AdminAuthUserModel'
+	'application/BaseClasses'
+	'application/AdminAuthUserModel'
 	'support/router'
-	'backbone/AdminLayoutView'
+	'application/AdminLayoutView'
 ], ($, BaseClasses, User, Router) ->
 	
 	class view extends BaseClasses.ViewFX

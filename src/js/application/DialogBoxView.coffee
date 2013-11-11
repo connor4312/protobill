@@ -1,6 +1,6 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
+	'application/BaseClasses'
 ], ($, BaseClasses) ->
 
 	class DialogBoxView extends BaseClasses.ViewFX

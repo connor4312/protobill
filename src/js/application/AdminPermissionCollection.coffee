@@ -1,5 +1,5 @@
 define [
-	'backbone/AdminPermissionModel'
+	'application/AdminPermissionModel'
 ], (AdminPermissionModel) ->
 
 	class PermissionCollection extends Backbone.Collection

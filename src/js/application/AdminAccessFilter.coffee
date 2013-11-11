@@ -1,8 +1,8 @@
 define [
 	'jquery'
-	'backbonejs'
+	'backbone'
 	'support/router'
-	'backbone/AdminAuthUserModel'
+	'application/AdminAuthUserModel'
 ], ($, Backbone, Router, AdminAuthUserModel) ->
 	
 	return () ->

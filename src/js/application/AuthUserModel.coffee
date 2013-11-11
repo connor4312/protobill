@@ -1,6 +1,6 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
+	'application/BaseClasses'
 ], ($, BaseClasses) ->
 
 	class UserModel extends BaseClasses.Model

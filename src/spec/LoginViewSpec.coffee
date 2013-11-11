@@ -1,6 +1,6 @@
 define [
 	'jquery'
-	'backbone/AdminLoginView'
+	'application/AdminLoginView'
 ], ($, LoginView) ->
 	describe "Login Page", () ->
 		view = new LoginView

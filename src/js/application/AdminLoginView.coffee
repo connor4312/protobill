@@ -1,7 +1,7 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
-	'backbone/AdminAuthUserModel'
+	'application/BaseClasses'
+	'application/AdminAuthUserModel'
 	'support/router'
 ], ($, BaseClasses, User, Router) ->
 	
@@ -29,11 +29,11 @@ define [
 
 			success = () =>
 				User.authenticate () =>
-						@nestView 'backbone/ErrorMessageView', (ErrorMessage) ->
+						@nestView 'application/ErrorMessageView', (ErrorMessage) ->
 							return new ErrorMessage { container: this, level: 'success', message: 'Logging you in...'}
 						Router().navigate 'admin/dashboard', {trigger: true}
 					, () =>
-						@nestView 'backbone/ErrorMessageView', (ErrorMessage) ->
+						@nestView 'application/ErrorMessageView', (ErrorMessage) ->
 							return new ErrorMessage { container: this, level: 'danger', message: 'Invalid username or password!'}
 						@endLoading $('.container-body', @el)
 					, () =>

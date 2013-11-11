@@ -1,6 +1,6 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
+	'application/BaseClasses'
 ], ($, Base) ->
 	describe "Model specs", () ->
 

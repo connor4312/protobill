@@ -1,8 +1,8 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
-	'backbone/AdminAuthUserModel'
-	'backbone/AdminAccessFilter'
+	'application/BaseClasses'
+	'application/AdminAuthUserModel'
+	'application/AdminAccessFilter'
 	'support/router'
 ], ($, BaseClasses, User, Filter, Router) ->
 	

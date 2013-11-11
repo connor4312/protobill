@@ -1,5 +1,5 @@
 define [
-	'backbone/AdminPermissionRoleModel'
+	'application/AdminPermissionRoleModel'
 ], (AdminPermissionRoleModel) ->
 
 	class AdminPermissionRoleCollection extends Backbone.Collection

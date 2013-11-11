@@ -1,6 +1,6 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
+	'application/BaseClasses'
 	'fusejs'
 ], ($, BaseClasses, Fuse) ->
 	

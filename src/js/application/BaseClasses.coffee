@@ -1,9 +1,10 @@
 define [
 	'jquery'
 	'underscore'
-	'backbonejs'
+	'backbone'
 	'templates'
 	'support/router'
+	'backbonevalidation'
 ], ($, _, Backbone, Template, Router, Socket) ->
 	class BaseView extends Backbone.View
 		constructor: ->
@@ -51,7 +52,7 @@ define [
 			@binding.push $el
 
 		showDialog: (view, params = {}) ->
-			@nestView 'backbone/DialogBoxView', (DialogView) ->
+			@nestView 'application/DialogBoxView', (DialogView) ->
 				return new DialogView {
 					view: view
 					func: (container, ContentView, callback) ->
@@ -137,92 +138,6 @@ define [
 			_this = this
 			$('input[name]', form).each () ->
 				_this.set $(this).attr('name'), $(this).val()
-
-		validate: (options) =>
-			errors = [];
-			patterns = {
-				alpha: (input) ->
-					if input.match(/^[A-z]+$/g)
-						return true
-					else
-						return 'This may only contain alphabetic characters'
-				alpha_dash: (input) ->
-					if input.match(/^[A-z\-]+$/g)
-						return true
-					else
-						return 'This may only contain letters and dashes'
-				alpha_int: (input) ->
-					if input.match(/^[A-z0-9]+$/g)
-						return true
-					else
-						return 'This must be alphanumeric'
-				alpha_num: (input) ->
-					if input.match(/^[A-z0-9\.]+$/g)
-						return true
-					else
-						return 'This must be alphanumeric'
-				email: (input) ->
-					if input.match(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/g)
-						return true
-					else
-						return 'This is not a valid email'
-				url: (input) ->
-					if input.match(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/g)
-						return true
-					else
-						return 'This must be a URL'
-				integer: (input) ->
-					if input.match(/^[0-9]+$/g)
-						return true
-					else
-						return 'This must be an integer'
-				numeric: (input) ->
-					if input.match(/^[0-9\.]+$/g)
-						return true
-					else
-						return 'This must be a numeric value'
-				confirm: (input) ->
-					if input is true or input is 'yes' or input is 1 or input is '1'
-						return true
-					else
-						return false
-					return false
-				between: (input, args) ->
-					if args.length is 1
-						if input.length > args[0]
-							return true
-						else
-							return 'This must longer than ' + args[0] + ' characters'
-					if args.length is 2
-						if input.length > args[0] and input.length < args[1]
-							return true
-						else
-							return 'This must be between ' + args[0] + ' and ' + args[1] + ' characters'
-			}
-			for key, rules of @rules
-				if (not key in @attributes or not @attributes[key]) and 'required' in rules
-					errors.push { attr: key, message: 'This is required'}
-					continue
-
-				for rule in rules
-					if _.isRegExp(rule) and not @attributes[key].match(rule)
-						errors.push { attr: key, message: 'This in the wrong format'}
-						continue
-
-					parts = rule.split ':'
-					name = parts[0]
-					if parts.length is 2
-						args = parts[1].split ','
-					else
-						args = []
-
-					if patterns[name]? and @attributes[key]?
-						valid = patterns[name](@attributes[key], args)
-						if valid isnt true
-							errors.push { attr: key, message: valid }
-							continue
-
-			if errors.length then return errors
 
 	return {
 		View: BaseView

@@ -1,5 +1,5 @@
 define [
-	'backbone/BaseClasses'
+	'application/BaseClasses'
 ], (BaseClasses) ->
 
 	class PermissionModel extends BaseClasses.Model

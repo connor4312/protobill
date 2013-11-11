@@ -1,11 +1,11 @@
 define [
 	'jquery'
 	'underscore'
-	'backbone/BaseClasses'
-	'backbone/AdminPermissionRoleCollection'
-	'backbone/AdminPermissionCollection'
-	'backbone/AdminPermissionRoleModel'
-	'backbone/AdminLayoutView'
+	'application/BaseClasses'
+	'application/AdminPermissionRoleCollection'
+	'application/AdminPermissionCollection'
+	'application/AdminPermissionRoleModel'
+	'application/AdminLayoutView'
 ], ($, _, BaseClasses, PermissionRoleCollection, PermissionCollection, AdminPermissionRoleModel) ->
 	
 	class view extends BaseClasses.ViewFX
@@ -24,7 +24,7 @@ define [
 				@render { roles: @roles }
 				@renderList()
 				fuzzybox = $('#js-fuzzypermsearch', @el)
-				@nestView 'backbone/AdminFuzzySearchView', (view) =>
+				@nestView 'application/AdminFuzzySearchView', (view) =>
 					view = new view fuzzybox, @permissions, ['name', 'display_name'], '{name}: <b>{display_name}</b>'
 					@endLoading()
 					return view;
@@ -50,7 +50,7 @@ define [
 			'click #js-roles li': 'chooseRole'
 
 		displaySelectionBox: () ->
-			@showDialog 'backbone/AdminPermissionRoleDialog', {
+			@showDialog 'application/AdminPermissionRoleDialog', {
 				addNew: (role) =>
 					role.save()
 					@roles.add role

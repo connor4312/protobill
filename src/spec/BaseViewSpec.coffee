@@ -1,6 +1,6 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
+	'application/BaseClasses'
 ], ($, BaseClasses) ->
 	describe "Base view testing", () ->
 
@@ -31,7 +31,7 @@ define [
 			spyOn(foo, 'destroy');
 
 			runs () ->
-				View.nestView 'backbone/ErrorMessageView', (view) ->
+				View.nestView 'application/ErrorMessageView', (view) ->
 					done = true
 					return foo
 

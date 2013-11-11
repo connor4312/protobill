@@ -1,6 +1,6 @@
 define [
 	'underscore'
-	'backbonejs'
+	'backbone'
 ], (_, Backbone) ->
 
 	instance = null
@@ -24,7 +24,7 @@ define [
 				if @currentView?
 					@currentView.destroy()
 					
-				require ['backbone/' + view], (view) ->
+				require ['application/' + view], (view) ->
 					@currentView = new view
 
 				$('body').scrollTop 0
@@ -42,10 +42,10 @@ define [
 			@navto 'AdminPermissionView'
 
 		router.on 'route:adminDirect', () ->
-			require ['backbone/AdminAccessFilter'], (filter) ->
+			require ['application/AdminAccessFilter'], (filter) ->
 				filter()
 
-		router.on 'route:fourohforu', () ->
+		router.on 'route:fourohfour', () ->
 			console.log '404'
 
 		Backbone.history.start({pushState: true, root: window.basepath})

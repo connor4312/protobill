@@ -1,7 +1,7 @@
 define [
 	'jquery'
-	'backbone/BaseClasses'
-	'backbone/AdminPermissionRoleModel'
+	'application/BaseClasses'
+	'application/AdminPermissionRoleModel'
 ], ($, BaseClasses, AdminPermissionRoleModel) ->
 	
 	class AdminPermissionRoleDialog extends BaseClasses.DialogBoxView
