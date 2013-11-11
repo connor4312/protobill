@@ -2,7 +2,6 @@
 
 use Model\Role;
 use DB;
-use Response;
 
 class EloquentRoleRepository implements RoleRepositoryInterface {
 
@@ -12,10 +11,21 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		$this->roletable = (new Role)->getTable();
 	}
 	
+	/**
+	 * List all roles
+	 * 
+	 * @return array
+	 */
 	public function all() {
 		return $this->getRoleList();
 	}
 
+	/**
+	 * Shows a single role by ID
+	 * 
+	 * @param int $id
+	 * @return array
+	 */
 	public function show($id) {
 
 		$result = $this->getRoleList(function($query) use ($id) {
@@ -25,22 +35,36 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		return (array) array_shift($result);
 	}
 
+	/**
+	 * Creates a role based off an array of input. 
+	 * 
+	 * 
+	 * @param array $input Expected to pass a `permissions` key, containing an
+	 *                     indexed array of permission ids.
+	 * @return array|bool The newly created role model, or false on fail
+	 */
 	public function create($input) {
 
 		$role = new Role;
 		$role->name = $input['name'];
+
 		if ($role->save()) {
 
 			$this->updatePermissionsLinks($id, $input['permissions']);
 			return $this->show($role->id);
 			
 		} else {
-			return Response::json(array(), 400);
+			return false;
 		}
-
-		return $role;
 	}
 
+	/**
+	 * Edits a role by ID, with an array of attributes
+	 * 
+	 * @param array $input Expected to pass a `permissions` key, containing an
+	 *                     indexed array of permission ids.
+	 * @return array|bool The newly created role model, or false on fail
+	 */
 	public function edit($id, $input) {
 
 		$role = Role::find($id);
@@ -51,23 +75,40 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 			return $this->show($role->id);
 			
 		} else {
-			return Response::json(array(), 400);
+			return false;
 		}
 	}
 
+	/**
+	 * Deletes a role by ID
+	 * 
+	 * @param int $id
+	 * @return bool
+	 */
 	public function delete($id) {
 
 		if ($role = Role::find($id)) {
 			$role->delete();
 		} else {
-			return Response::json(array(), 400);
+			return false;
 		}
 	}
 
+	/**
+	 * Retrieves the permissions linking table from the query builder
+	 * 
+	 * @return Illuminate\Database\Query\Builder
+	 */
 	protected function roleLinkingTable() {
 		return DB::table('permission_role');
 	}
 
+	/**
+	 * Updates the linkages of permissions on a model
+	 * 
+	 * @param int $id ID of the model to update links for
+	 * @param array $input Array of IDs to update to
+	 */
 	protected function updatePermissionsLinks($id, $input) {
 
 		$data = $this->getRoleList(function($query) use ($id) {
@@ -78,6 +119,14 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		$this->deletePermissions($data[0]['permissions'], $input, $id);
 	}
 
+	/**
+	 * Adds permissions to the model, based off an array comparison
+	 * 
+	 * @param array $existing The existing permissions on the model (IDs)
+	 * @param array $new Array of new permissions to update to
+	 * @param int $role_id The role to update
+	 * @return void
+	 */
 	protected function addPermissions($existing, $new, $role_id) {
 
 		$addPermissions = array_diff($new, $existing);
@@ -90,6 +139,14 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		$this->roleLinkingTable()->insert($inserts);
 	}
 
+	/**
+	 * Deletes permissions to the model, based off an array comparison
+	 * 
+	 * @param array $existing The existing permissions on the model (IDs)
+	 * @param array $new Array of new permissions to update to
+	 * @param int $role_id The role to update
+	 * @return void
+	 */
 	protected function deletePermissions($existing, $new, $role_id) {
 
 		$deletePermissions = array_diff($existing, $new);
@@ -103,6 +160,12 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 			})->delete();
 	}
 
+	/**
+	 * Gets roles
+	 * 
+	 * @param Closure $modifier Query modifier
+	 * @return array
+	 */
 	protected function getRoleList($modifier = null) {
 
 		$query = $this->generateQuery();
@@ -111,6 +174,11 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		return $this->formatResults($query->get());
 	}
 
+	/**
+	 * Generates the start of a query to get the permissions for role(s)
+	 * 
+	 * @return Illuminate\Database\Query\Builder
+	 */
 	protected function generateQuery() {
 
 		return DB::table($this->roletable)
@@ -118,6 +186,13 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 			->leftjoin('permission_role', 'permission_role.role_id', '=', $this->roletable . '.id');
 	}
 
+	/**
+	 * Stupid function to apply the modifier to a query
+	 * 
+	 * @param Illuminate\Database\Query\Builder $query
+	 * @param Closure $modifier
+	 * @return void
+	 */
 	protected function applyModifier($query, $modifier) {
 
 		if ($modifier) {
@@ -125,6 +200,13 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		}
 	}
 
+	/**
+	 * Generates an array of role results from the give query
+	 * 
+	 * @param array $results Results from a query started with generateQuery()
+	 * @return array List of permissions given  as an indexed array in the
+	 *               `permissions` key
+	 */
 	protected function formatResults($results) {
 
 		$out = array();

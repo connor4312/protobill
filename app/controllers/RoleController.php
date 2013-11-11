@@ -15,7 +15,7 @@ class RoleController extends BaseController {
 	 */
 	public function index()
 	{
-        return $this->roles->all();
+		return $this->jsonResult($this->roles->all());
 	}
 
 	/**
@@ -26,7 +26,7 @@ class RoleController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return $this->roles->show($id);
+        return $this->jsonResult($this->roles->show($id));
 	}
 
 	/**
@@ -37,7 +37,7 @@ class RoleController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-        return $this->roles->delete($id);
+        return $this->jsonResult($this->roles->delete($id));
 	}
 
 	/**
@@ -48,7 +48,7 @@ class RoleController extends BaseController {
 	 */
 	public function update($id)
 	{
-        return $this->roles->edit($id, Input::all());
+        return $this->jsonResult($this->roles->edit($id, Input::all()));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class RoleController extends BaseController {
 	 */
 	public function store()
 	{
-        return $this->roles->create(Input::all());
+        return $this->jsonResult($this->roles->create(Input::all()));
 	}
 
 }

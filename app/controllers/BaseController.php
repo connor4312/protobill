@@ -15,4 +15,21 @@ class BaseController extends Controller {
 		}
 	}
 
+	/**
+	 * Simple function to return a generic error if false was passed back from
+	 * a repo. Backbone should take care of these just fine.
+	 * 
+	 * @param mixed $result
+	 * @return Response
+	 */
+	protected function jsonResult($result) {
+
+        if ($result === false) {
+        	return Response::json(array(), 400);
+        } else {
+        	return Response::json((array) $result, 200);
+        }
+
+	}
+
 }
