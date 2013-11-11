@@ -74,8 +74,8 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 			$query->where($this->roletable . '.id', $id);
 		});
 
-		$this->addPermissions($data['permissions'], $input, $id);
-		$this->deletePermissions($data['permissions'], $input, $id);
+		$this->addPermissions($data[0]['permissions'], $input, $id);
+		$this->deletePermissions($data[0]['permissions'], $input, $id);
 	}
 
 	protected function addPermissions($existing, $new, $role_id) {
@@ -90,17 +90,17 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 		$this->roleLinkingTable()->insert($inserts);
 	}
 
-	protected function deletePermissions($existing, $new, $role_id) {+
+	protected function deletePermissions($existing, $new, $role_id) {
 
 		$deletePermissions = array_diff($existing, $new);
 
 		$this->roleLinkingTable()
 			->where('role_id', $role_id)
-			->where(function() use ($deletePermissions) {
+			->where(function($query) use ($deletePermissions) {
 				foreach ($deletePermissions as $permission_id) {
 					$query->where('permission_id', '=', $permission_id, 'or');
 				}
-			});
+			})->delete();
 	}
 
 	protected function getRoleList($modifier = null) {
@@ -114,8 +114,8 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 	protected function generateQuery() {
 
 		return DB::table($this->roletable)
-			->select($this->roletable . '.*')
-			->join('permission_role', 'permission_role.role_id', '=', $this->roletable . '.id');
+			->select($this->roletable . '.*', 'permission_role.permission_id')
+			->leftjoin('permission_role', 'permission_role.role_id', '=', $this->roletable . '.id');
 	}
 
 	protected function applyModifier($query, $modifier) {
@@ -128,15 +128,17 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 	protected function formatResults($results) {
 
 		$out = array();
+
 		foreach ($results as $result) {
-			
 			$result = get_object_vars($result);
 
-			if (array_key_exists($results['id'], $out)) {
+			if (!array_key_exists($result['id'], $out)) {
 				$out[$result['id']] = $result + array('permissions' => array());
 			}
 
-			$out[$result['id']]->permissions[] = $out;
+			if ($result['permission_id']) {
+				$out[$result['id']]['permissions'][] = $result['permission_id'];
+			}
 		}
 
 		return array_values($out);
