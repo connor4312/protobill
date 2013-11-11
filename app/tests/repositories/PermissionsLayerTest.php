@@ -6,7 +6,6 @@ class FakePermissionsClass extends \Repository\PermissionsLayer {
 
 class PermissionsLayerTest extends TestCase {
 
-	protected $generated = false;
 	protected $user = null;
 
 	protected function layer() {
@@ -21,10 +20,6 @@ class PermissionsLayerTest extends TestCase {
 
 	protected function roledUser() {
 
-		if ($this->generated) {
-			return $this->user();
-		}
-
 		$admin = new \Model\Role;
 		$admin->name = 'Demorole';
 		$admin->save();
@@ -38,8 +33,6 @@ class PermissionsLayerTest extends TestCase {
 
 		$user = $this->user();
 		$user->attachRole($admin);
-
-		$this->generated = true;
 
 		return $this->user();
 	}

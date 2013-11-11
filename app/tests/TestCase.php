@@ -9,6 +9,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	 *
 	 * @return \Symfony\Component\HttpKernel\HttpKernelInterface
 	 */
+
+	protected $migrated = false;
+
 	public function createApplication()
 	{
 		$unitTesting = true;
@@ -44,7 +47,11 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
 	protected function resetTables() {
 
-		Artisan::call('migrate');
+		if ($this->migrated) {
+			Artisan::call('migrate:refresh');
+		} else {
+			Artisan::call('migrate');
+		}
 
 		DB::table('users')->insert(array(
 			'name_first' => 'Firstname',
