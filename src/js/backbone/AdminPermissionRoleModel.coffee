@@ -5,8 +5,10 @@ define [
 ], ($, BaseClasses, Router) ->
 
 	class AdminPermissionRoleModel extends BaseClasses.Model
+		url: window.baseurl + '/api/role'
+		
 		initialize: ->
 			@rules =
 				name: ['alpha']
 	
-	return new AdminPermissionRoleModel
+	return AdminPermissionRoleModel

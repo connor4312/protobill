@@ -50,7 +50,7 @@ class EloquentRoleRepository implements RoleRepositoryInterface {
 
 		if ($role->save()) {
 
-			$this->updatePermissionsLinks($id, $input['permissions']);
+			$this->updatePermissionsLinks($role->id, $input['permissions']);
 			return $this->show($role->id);
 			
 		} else {

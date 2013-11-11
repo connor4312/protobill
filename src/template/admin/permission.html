@@ -3,7 +3,9 @@
 		<div class="panel">
 			<h2>Roles</h2>
 			<ul id="js-roles">
-				
+			<% roles.forEach(function(value) { %>
+				<li><%- value.get('name') %></li>
+			<% }); %>
 			</ul>
 			<button class="btn btn-default" id="js-addrole">Add New Role</button>
 		</div>

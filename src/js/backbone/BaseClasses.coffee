@@ -62,17 +62,6 @@ define [
 
 		handleError: (data) =>
 
-	class DialogBoxView extends BaseView
-
-		initialize: (options) ->
-			@el = options.container
-			@cb = options.callback ? () ->
-			
-			@render()
-
-		afterRender: ()->
-			@cb()
-
 	class ViewFX extends BaseView
 		centerElements: ($element = @el) ->
 			center = () ->
@@ -117,15 +106,30 @@ define [
 
 		formErrors: (validation, $form, success, fail) ->
 			$('.js-help-block-error', $form).remove()
-			if validation.success is true
+			if not validation?
 				success()
 			else
-				for error in validation.errors
+				for error in validation
 					$item = $('input[name="' + error.attr + '"]', $form).closest '.form-group'
 					$item.addClass('has-error').append('<span class="help-block js-help-block-error">' + error.message + '</span>')
 				fail()
 		stopPropagation: (e) ->
 			e.stopPropagation()
+
+	class DialogBoxView extends ViewFX
+
+		initialize: (options) ->
+			@el = options.container
+			@cb = options.callback ? () ->
+			@params = options.params
+
+			@render()
+
+		afterRender: () ->
+			@cb()
+			@load()
+
+		load: () ->
 
 	class Model extends Backbone.Model
 
@@ -218,8 +222,7 @@ define [
 							errors.push { attr: key, message: valid }
 							continue
 
-			success = if errors.length then false else true
-			return { success: success, errors: errors }
+			if errors.length then return errors
 
 	return {
 		View: BaseView

@@ -1,24 +1,29 @@
 define [
 	'jquery'
 	'backbone/BaseClasses'
-	'backbone/AdminPermissionCollection'
 	'backbone/AdminPermissionRoleCollection'
+	'backbone/AdminPermissionCollection'
+	'backbone/AdminPermissionRoleModel'
 	'backbone/AdminLayoutView'
-], ($, BaseClasses, PermissionRoleCollection, PermissionCollection) ->
+], ($, BaseClasses, PermissionRoleCollection, PermissionCollection, AdminPermissionRoleModel) ->
 	
 	class view extends BaseClasses.ViewFX
 		el: $ '#subpage'
 		template: "admin/permission.html"
 
 		initialize: () ->
-			@permissions = new PermissionCollection
-			@roles = new PermissionRoleCollection
-			@roles.fetch
-				success: =>
-					@render { roles: @roles }
 
-		render: () ->
-			@renderTemplate()
+			@permissions = new PermissionCollection
+
+			@roles = new PermissionRoleCollection
+			update = () =>
+				@render { roles: @roles }
+
+			@roles.fetch { success: update }
+			@roles.on 'change add', update
+					
+
+		afterRender: () ->
 			@startLoading()
 			fuzzybox = $('#js-fuzzypermsearch', @el)
 			@permissions.fetch
@@ -31,6 +36,10 @@ define [
 			'click #js-addrole': 'displaySelectionBox'
 
 		displaySelectionBox: () ->
-			@showDialog 'backbone/AdminPermissionRoleDialog'
+			@showDialog 'backbone/AdminPermissionRoleDialog', {
+				addNew: (role) =>
+					role.save()
+					@roles.add role
+			}
 
 	return view
