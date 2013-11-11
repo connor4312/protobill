@@ -2,17 +2,14 @@
 	<div class="col-md-3">
 		<div class="panel">
 			<h2>Roles</h2>
-			<ul id="js-roles">
-			<% roles.forEach(function(value) { %>
-				<li><%- value.get('name') %></li>
-			<% }); %>
+			<ul id="js-roles" class="select-list">
 			</ul>
 			<button class="btn btn-default" id="js-addrole">Add New Role</button>
 		</div>
 	</div>
 	<div class="col-md-9">
 		<div class="panel">
-			<h2>Role: None</h2>
+			<h2>Role: <span id="js-role-name">None</span></h2>
 			<div id="js-fuzzypermsearch"></div>
 		</div>
 	</div>
