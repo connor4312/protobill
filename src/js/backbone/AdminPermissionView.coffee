@@ -41,7 +41,9 @@ define [
 				content += '<li data-id="' + value.get('id') + '">' + value.get('name') + '</li>'
 
 			$('#js-roles', @el).html content
-			@selectRole @roles.at(@roles.length - 1).get('id')
+
+			if role = @roles.at(@roles.length - 1)
+				@selectRole role.get('id')
 		
 		events:
 			'click #js-addrole': 'displaySelectionBox'

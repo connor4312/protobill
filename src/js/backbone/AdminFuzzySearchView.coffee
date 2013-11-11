@@ -30,6 +30,18 @@ define [
 
 				if e.which is 13 then e.preventDefault()
 				_this.search $(@).val()
+			
+			@bind $('.js-fuzzyresults', @el), 'click', $('li'), @selectResult
+
+		selectResult: (e) =>
+			
+			result = @collection.get $(e.target).closest('li').attr('data-id')
+			schema = @schema
+			for replace in @replaces
+				input = result.get(replace.match(/[A-z_\-]+/g));
+				schema = schema.replace replace, input
+
+			$('.js-fuzzystatic', @el).append('<li data-id="' + result.get('id') + '">' + schema + '</li>')
 
 		showResults: (results, query) ->
 
@@ -49,7 +61,8 @@ define [
 							spool += '<span>' + letter + '</span>'
 
 					schema = schema.replace replace, spool
-				content += '<li>' + schema + '</li>'
+
+				content += '<li data-id="' + result.id + '">' + schema + '</li>'
 
 			$('.js-fuzzyresults', @el).html content
 

@@ -21,7 +21,7 @@ define [
 
 		destroy: =>
 			view.destroy() for view in @nestedViews
-			e.element.unbind(e.ev) for e in @binding
+			e.off() for e in @binding
 			@binding = []
 			$(@el).empty()
 			@remove()
@@ -41,14 +41,14 @@ define [
 
 		afterRender: (params, template, $element) ->
 
-		bind: (elem, ev, handler) ->
+		bind: (elem, args...) ->
 			if elem instanceof $
 				$el = elem
 			else 
 				$el = $(elem, @el)
 
-			$el.bind ev, handler
-			@binding.push { element: $el, ev: ev }
+			$el.on.apply $el, args
+			@binding.push $el
 
 		showDialog: (view, params = {}) ->
 			@nestView 'backbone/DialogBoxView', (DialogView) ->
