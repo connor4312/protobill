@@ -27,89 +27,89 @@ define [
 
 		it "validation enforces required", () ->
 			model.unset 'required'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows required", () ->
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces between", () ->
 			model.set 'between', 'foo'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 			model.set 'between', 'fooooooooooo'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows between", () ->
 			model.set 'between', 'foooooo'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces alpha", () ->
 			model.set 'alpha', 'Foo!'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows alpha", () ->
 			model.set 'alpha', 'Foo'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces alpha_dash", () ->
 			model.set 'alpha_dash', 'Foo!'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows alpha_dash", () ->
 			model.set 'alpha_dash', 'Foo-Bar'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces alpha_int", () ->
 			model.set 'alpha_int', 'Foo!'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows alpha_int", () ->
 			model.set 'alpha_int', 'Foo15'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces alpha_num", () ->
 			model.set 'alpha_num', 'Foo!'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows alpha_num", () ->
 			model.set 'alpha_num', 'Foo1.5'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces url", () ->
 			model.set 'url', 'http://example .com'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows url", () ->
 			model.set 'url', 'http://example.com'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces integer", () ->
 			model.set 'integer', '1.5'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows integer", () ->
 			model.set 'integer', '15'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces numeric", () ->
 			model.set 'numeric', '1.5!'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows numeric", () ->
 			model.set 'numeric', '1.5'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces confirm", () ->
 			model.set 'confirm', 'no'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows confirm", () ->
 			model.set 'confirm', 'yes'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
 		
 		it "validation enforces email", () ->
 			model.set 'email', 'test@example'
-			expect(model.validate().success).toEqual(false);
+			expect(model.validate()).not.toEqual(undefined);
 
 		it "validation allows email", () ->
 			model.set 'email', 'test@example.com'
-			expect(model.validate().success).toEqual(true);
+			expect(model.validate()).toEqual(undefined);
