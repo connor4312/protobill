@@ -4,14 +4,21 @@ class UsersController extends BaseController {
 
 	protected $user;
 
+	/**
+	 *  Creates the UsersController instance. The UsersController handles much of general user functions.
+	 * 
+	 * @access 	public
+	 * @param 	Repository\UserRepositoryInterface 	$users 	The UserRepositoryInterface used by the UsersController.
+	 * @return 	UsersController
+	 */
 	public function __construct(Repository\UserRepositoryInterface $users) {
 		$this->user = $users;
 	}
 
 	/**
-	 * Display a listing of the resource.
+	 * Shows all of the users.
 	 *
-	 * @return Response
+	 * @return Model\User 	User Eloquent object.
 	 */
 	public function index()
 	{
@@ -19,7 +26,7 @@ class UsersController extends BaseController {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Creates a new User and stores it.
 	 *
 	 * @return Response
 	 */
@@ -29,9 +36,9 @@ class UsersController extends BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Shows the specific User's information.
 	 *
-	 * @param  int  $id
+	 * @param  int  $id 	The ID of the user.
 	 * @return Response
 	 */
 	public function show($id)
@@ -40,9 +47,9 @@ class UsersController extends BaseController {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Edits the specified User; User is specified by @param $id.
 	 *
-	 * @param  int  $id
+	 * @param  int  $id 	ID of the user which is needed to edit.
 	 * @return Response
 	 */
 	public function edit($id)
@@ -51,9 +58,9 @@ class UsersController extends BaseController {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Updates the User in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $id 	ID of the user to update.
 	 * @return Response
 	 */
 	public function update($id)
@@ -62,9 +69,9 @@ class UsersController extends BaseController {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Destroys the User specified by @param $id. This method is irreversable and should not be called without knowledge of its results.
 	 *
-	 * @param  int  $id
+	 * @param  int  $id 	ID of the user to mutilate beyond repair (delete).
 	 * @return Response
 	 */
 	public function destroy($id)
