@@ -16,11 +16,7 @@ class PermissionsLayerTest extends TestCase {
 
 	protected function user() {
 
-		if ($this->user) {
-			return $this->user;
-		}
-		
-		return $this->user = \Model\User::find(1);
+		return \Model\User::find(1);
 	}
 
 	protected function roledUser() {

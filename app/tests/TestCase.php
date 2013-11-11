@@ -21,8 +21,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	public function setUp() {
 		parent::setUp();
 
-        Artisan::call('migrate');
-        Artisan::call('db:seed');
+		$this->resetTables();
 
 		Mail::pretend(true);
 	}
@@ -30,7 +29,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	public function tearDown() {
 		parent::tearDown();
 
-		Artisan::call('migrate:reset');
 		Mockery::close();
 	}
 
@@ -42,5 +40,28 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	protected function assertIsJson($data)
 	{
 		$this->assertEquals(0, json_last_error());
+	}
+
+	protected function resetTables() {
+
+		Artisan::call('migrate');
+
+		DB::table('users')->insert(array(
+			'name_first' => 'Firstname',
+			'name_last' => 'Lastname',
+			'company' => 'Company Name',
+			'email' => 'john@example.com',
+			'address_1' => 'Address Line 1',
+			'address_2' => 'Address Line 2',
+			'city' => 'City',
+			'state' => 'State',
+			'postcode' => '123456',
+			'country' => 'USA',
+			'phone' => '+123-456-1234',
+			'password' => Hash::make('seekrit123'),
+			'credit' => 10,
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s')
+		));
 	}
 }
