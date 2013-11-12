@@ -2,16 +2,29 @@
 
 class PermissionController extends BaseController {
 
+	/**
+	 * The Repository\PermissionRepositoryInterface object for the PermissionController
+	 * 
+	 * @var 	$permission
+	 */
 	protected $permission;
 
+	/**
+	 * Creates the PermissionController instance; this constructor passes a PermissionRepositoryInterface object.
+	 * 
+	 * @access 	public
+	 * @param 	Repository\PermissionRepositoryInterface 	$permission 	The permission object.
+	 * @return 	PermissionController
+	 */
 	public function __construct(Repository\PermissionRepositoryInterface $permission) {
 		$this->permission = $permission;
 	}
 
 	/**
-	 * Display a listing of the resource.
+	 * Shows a list of all the permissions.
 	 *
-	 * @return Response
+	 * @access 	public
+	 * @return 	string 	The representation of all the permissions.
 	 */
 	public function index()
 	{
@@ -19,10 +32,11 @@ class PermissionController extends BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Shows a specific permission based by $id.
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @access 	public
+	 * @param  	int 	$id 	The permission ID to display.
+	 * @return 	The requested permission.
 	 */
 	public function show($id)
 	{
