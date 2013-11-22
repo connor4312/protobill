@@ -2,16 +2,29 @@
 
 class AuthenticationController extends BaseController {
 
+	/**
+	 * The Repository\AuthenticationRepositoryInterface object passed to the constructor.
+	 * 
+	 * @var 	Repository\AuthenticationRepositoryInterface
+	 */
 	protected $auth;
 
+	/**
+	 * The constructor for the AuthenticationController; an AuthenticationRepositoryInterface object is necessary.
+	 * 
+	 * @access 	public
+	 * @param	$auth 	Repository\AuthenticationRepositoryInterface 	The ARI object.
+	 * @return 	AuthenticationController
+	 */
 	public function __construct(Repository\AuthenticationRepositoryInterface $auth) {
 		$this->auth = $auth;
 	}
 
 	/**
-	 * Attempts to authenticate the user
+	 * Attempts to authenticate the user.
 	 *
-	 * @return Response
+	 * @access 	public
+	 * @return 	Response
 	 */
 	public function index() {
 		
@@ -23,9 +36,10 @@ class AuthenticationController extends BaseController {
 	}
 
 	/**
-	 * Grabs the currently logged in user, if any
+	 * Grabs the currently logged in user, if any.
 	 * 
-	 * @return Response
+	 * @access 	public
+	 * @return 	Response
 	 */
 	public function current() {
 		if ($user = $this->auth->current()) {
@@ -36,9 +50,10 @@ class AuthenticationController extends BaseController {
 	}
 
 	/**
-	 * Logs the user out and flushes the session
+	 * Logs the user out and flushes the session completely.
 	 * 
-	 * @return Response
+	 * @access 	public
+	 * @return 	Response
 	 */
 	public function logout() {
 
